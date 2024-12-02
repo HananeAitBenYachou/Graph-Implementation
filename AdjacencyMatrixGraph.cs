@@ -22,6 +22,12 @@ namespace Graph_Implementation
                 return;
             }
 
+            if (AdjacencyMatrix[VerticesDictionary[source], VerticesDictionary[destination]] > 0)
+            {
+                Console.WriteLine($"Error : an edge already exists between the vertices {source} and {destination}\n\n");
+                return;
+            }
+
             if (weight <= 0)
             {
                 Console.WriteLine($"Error : invalid weight (weight should be greater than zero)\n\n");

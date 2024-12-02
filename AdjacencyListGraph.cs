@@ -28,6 +28,12 @@ namespace Graph_Implementation
                 return;
             }
 
+            if (AdjacencyList[source].Any(t => t.Item1 == destination))
+            {
+                Console.WriteLine($"Error : an edge already exists between the vertices {source} and {destination}\n\n");
+                return;
+            }
+
             if (weight <= 0)
             {
                 Console.WriteLine($"Error : invalid weight (weight should be greater than zero)\n\n");
@@ -77,11 +83,17 @@ namespace Graph_Implementation
 
         public override int GetVertexInDegree(string vertex)
         {
+            if (!VerticesDictionary.ContainsKey(vertex))
+            {
+                Console.WriteLine($"Error : invalid vertex {vertex}\n\n");
+                return -1;
+            }
+
             int sum = 0;
 
-            foreach (var tuplesList in AdjacencyList.Values)
+            foreach (var edges in AdjacencyList.Values)
             {
-                if (tuplesList.Any(t => t.Item1 == vertex))
+                if (edges.Any(t => t.Item1 == vertex))
                     sum++;
             }
 
